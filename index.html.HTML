@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12-Question Quiz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #timer {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #d9534f;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .section-header {
+            background: #333;
+            color: white;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .question-card {
+            background: white;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .question-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .options-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .option-btn {
+            padding: 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: 2px solid #007bff;
+            background: white;
+            color: #007bff;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            background: #e7f1ff;
+        }
+
+        .option-btn.selected {
+            background: #007bff;
+            color: white;
+        }
+
+        #submit-btn {
+            margin: 40px 0;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #feedback {
+            display: none;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="timer">30:00</div>
+
+    <div class="quiz-container" id="quiz-form">
+        <!-- Part A -->
+        <div class="section-header">Part A</div>
+        
+        <div class="question-card" data-q="1" data-correct="D">
+            <h3>Q1. Beaver Children</h3>
+            <img src="q1.png" alt="Question 1 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-q="2" data-correct="C">
+            <h3>Q2. Trail Home</h3>
+            <img src="q2.png" alt="Question 2 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-q="3" data-correct="D">
+            <h3>Q3. Hamburger Recipe</h3>
+            <img src="q3.png" alt="Question 3 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-q="4" data-correct="B">
+            <h3>Q4. Lila's Guessing Game</h3>
+            <img src="q4.png" alt="Question 4 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <!-- Part B -->
+        <div class="section-header">Part B</div>
+
+        <div class="question-card" data-q="5" data-correct="A">
+            <h3>Q5. Remembering faces</h3>
+            <img src="q5.png" alt="Question 5 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-q="6" data-correct="A">
+            <h3>Q6. Colourful Tower</h3>
+            <img src="q6.png" alt="Question 6 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-q="7" data-correct="B">
+            <h3>Q7. Apples, Bananas, Broccoli and Carrots</h3>
+            <img src="q7.png" alt="Question 7 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-q="8" data-correct="C">
+            <h3>Q8. Tortoise and Hare</h3>
+            <img src="q8.png" alt="Question 8 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <!-- Part C -->
+        <div class="section-header">Part C</div>
+
+        <div class="question-card" data-q="9" data-correct="B">
+            <h3>Q9. Spring Blossom</h3>
+            <img src="q9.png" alt="Question 9 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-q="10" data-correct="D">
+            <h3>Q10. Hide and Seek</h3>
+            <img src="q10.png" alt="Question 10 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-q="11" data-correct="D">
+            <h3>Q11. Beach Necklaces</h3>
+            <img src="Q11.png" alt="Question 11 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-q="12" data-correct="C">
+            <h3>Q12. Strawberry Patch</h3>
+            <img src="q12.png" alt="Question 12 Image" class="question-img">
+            <div class="options-group">
+                <button class="option-btn" onclick="selectOption(this, 'A')">A</button>
+                <button class="option-btn" onclick="selectOption(this, 'B')">B</button>
+                <button class="option-btn" onclick="selectOption(this, 'C')">C</button>
+                <button class="option-btn" onclick="selectOption(this, 'D')">D</button>
+            </div>
+        </div>
+
+        <button id="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+        <div id="feedback"></div>
+    </div>
+
+    <script>
+        // Timer Logic
+        let timeRemaining = 30 * 60; 
+        const timerDisplay = document.getElementById('timer');
+
+        const countdown = setInterval(() => {
+            let minutes = Math.floor(timeRemaining / 60);
+            let seconds = timeRemaining % 60;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            timerDisplay.innerHTML = `${minutes}:${seconds}`;
+            
+            if (timeRemaining <= 0) {
+                clearInterval(countdown);
+                submitQuiz();
+                alert("Time is up!");
+            }
+            timeRemaining--;
+        }, 1000);
+
+        // Interaction Logic
+        const userAnswers = {};
+
+        function selectOption(btn, val) {
+            const parent = btn.closest('.question-card');
+            const qId = parent.getAttribute('data-q');
+            
+            // Remove selection from siblings
+            parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            
+            // Highlight current
+            btn.classList.add('selected');
+            userAnswers[qId] = val;
+        }
+
+        function submitQuiz() {
+            clearInterval(countdown);
+            let score = 0;
+            const questions = document.querySelectorAll('.question-card');
+            
+            questions.forEach(q => {
+                const qId = q.getAttribute('data-q');
+                const correct = q.getAttribute('data-correct');
+                if (userAnswers[qId] === correct) {
+                    score++;
+                }
+            });
+
+            const feedback = document.getElementById('feedback');
+            const quizForm = document.getElementById('quiz-form');
+            
+            feedback.style.display = 'block';
+            feedback.innerHTML = `<h2>Quiz Submitted!</h2>
+                                 <p>You scored ${score} out of 12.</p>
+                                 <button onclick="window.location.reload()">Retry</button>`;
+            
+            // Hide questions and scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            document.getElementById('submit-btn').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
